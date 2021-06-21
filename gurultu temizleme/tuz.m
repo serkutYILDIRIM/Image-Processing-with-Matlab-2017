@@ -1,0 +1,14 @@
+clc;
+close all;
+originalImage = imread('Cameraman.tif');
+[rows cols] = size(originalImage);
+totalPixels = int32(rows * cols);
+subplot(1, 2, 1);
+imshow(originalImage);
+percentage = str2double(cell2mat(inputdlg('Enter the percent noise: ', 'Enter answer', 1, {'2'}))) / 100.;
+numberOfNoisePixels = int32(percentage * double(rows) * double(cols));
+locations = randi(totalPixels, [numberOfNoisePixels, 1]);
+noisyImage = originalImage;
+noisyImage(locations) = 255;
+subplot(1, 2, 2);
+imshow(noisyImage, []);
